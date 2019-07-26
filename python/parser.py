@@ -41,4 +41,6 @@ def get_proxy_list(stype='all'):
 		if stype == 'all' or stype == serv_type:
 			server_list.append({'address': address, 'port': port, 'type': serv_type, 'ping': ping})
 
+	server_list = sorted(server_list, key=lambda k: k['ping'])
+
 	return server_list
