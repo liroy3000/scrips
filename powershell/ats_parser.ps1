@@ -20,20 +20,30 @@ function test_path($filename) {
     # Проверяет, существует ли выходной файл
     if (!(Test-Path "out\$filename")) {
         New-Item "out\$filename" -ItemType "file"
-        echo 'TIME;DURATION;TYPE;TRUNK2;NUMBER_IN;NUMBER_OUT;HZ1;HZ2;HZ3;HZ4;HZ5' | Out-File "out\$filename" -Encoding utf8
+        echo 'DATE;TIME;DURATION;TYPE;TRUNK2;NUMBER_IN;NUMBER_OUT;HZ1;HZ2;HZ3;HZ4;HZ5' | Out-File "out\$filename" -Encoding utf8
     }
 }
 
 cd $PSScriptRoot
 
+# Проверки существует ли файл numbers и не пустой ли он.
 if (!(Test-Path "numbers.txt")) {
     echo "Файл numbers.txt не существует!"
     exit
 }
-
 $numbers = Get-Content "numbers.txt"
 if ($numbers.Count -eq 0) {
     echo "В файле numbers.txt отстутствуют записи!"
+    exit
+}
+
+# Проверка, существует ли папка report и не пуста ли она.
+if (!(Test-Path report)) {
+    echo "Парка report не существует!"
+    exit
+}
+if ((ls report).Count -eq 0) {
+    echo "В папке report нет файлов!"
     exit
 }
 
@@ -64,11 +74,10 @@ foreach ($file in $files) {                                                     
         $val3 = pars_value $line 95 4
         $val4 = pars_value $line 99 5
         $val5 = pars_value $line 104 16
-        $call_time = $call_date[0..1] + '.' + $call_date[2..3] + '.20' + $call_date[4..5] + ' ' + $call_time[0..1] + ':' + $call_time[2..3] -join '' 
-        $outline = "`"$call_time`";`"$call_duration`";`"$call_type`";`"$trank2`";`"$number_in`";`"$number_out`";`"$val1`";`"$val2`";`"$val3`";`"$val4`";`"$val5`""
+        $outline = "`"$call_date`";`"$call_time`";`"$call_duration`";`"$call_type`";`"$trank2`";`"$number_in`";`"$number_out`";`"$val1`";`"$val2`";`"$val3`";`"$val4`";`"$val5`""
        
-        if ($number_out.Length -eq 5) {      # если номер звонящева 5-значный, значит это наш абонент
-            if ($number_in.Length -eq 5) {   # если номер вызываемого 5-значный, значит звонок внутри сети, делается запись в два файла
+        if ($number_out.Length -le 5) {      # если номер звонящевго 5-значный, значит это наш абонент
+            if ($number_in.Length -le 5) {   # если номер вызываемого 5-значный, значит звонок внутри сети, делается запись в два файла
                 if ($numbers -contains $number_in) {
                     test_path($number_in+"_IN_local.csv")
                     echo $outline | Out-File ("out\$number_in"+"_IN_local.csv") -Append -Encoding utf8
