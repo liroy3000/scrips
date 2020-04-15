@@ -1,6 +1,7 @@
 #!/bin/bash
 HIGHTCPU=8
 
+START_TIME=`date +%H:%M`
 cd $1
 TOP_FOLDERS=(*)
 
@@ -31,3 +32,5 @@ for TOP_FOLDER in ${TOP_FOLDERS[@]}; do
 		cd ../
 	done
 done
+echo "Start script: $START_TIME"
+echo "Stop script: `date +%H:%M`"
