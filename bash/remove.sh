@@ -20,7 +20,7 @@ for TOP_FOLDER in ${TOP_FOLDERS[@]}; do
 				 	sleep 5
 				 	LOADCPU=`uptime | awk '{print $10}' | sed 's/.$//' | sed 's/,/./'`
 				 else
-				 	breake
+				 	break
 				 fi
 				done
 				echo $TOP_FOLDER/$LVL_1/$LVL_2/$TO_RM
