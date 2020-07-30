@@ -23,3 +23,4 @@ PowerShell:
 
 Bash:
 - remove.sh - удаление папок в заданной директории с контролем load average.
+- get_bad_mailbox.sh - выгрузка несуществующих электронных адресов из лога Exim.
