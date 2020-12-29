@@ -10,7 +10,9 @@ Python:
  - regular.py - поиск строк в файле по заданному регулярному выражению.
  - del_old_indeces.py - удаление индексов из elasticsearch.
  - check_index.py - мониторинг создания индексов в elasticsearch.
- - check_pagespeed.py - мониторинг pagespeed сайта.
+ - pagespeed - мониторинг pagespeed сайта
+   - check_pagerspeed.py - считывает имена сайтов из файла data_file, получает данные из pagerspeed api и записывает результаты в data_file.
+   - get_pagerspeed.py - получает данные из data_file. Если в data_file сайта нет, то добавляет его туда.
 
 PowerShell:
  - add_server.ps1 - добавляет новое подключение к серверу 1С в файлы .v8i.
