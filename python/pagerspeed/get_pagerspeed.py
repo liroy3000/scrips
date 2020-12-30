@@ -14,7 +14,7 @@ try:
 except IndexError:
     mobile = False
 
-data_file = "pagerspeed.json"
+data_file = "pagespeed.json"
 
 with open(data_file, "r") as file:
 	data = loads(file.read())
