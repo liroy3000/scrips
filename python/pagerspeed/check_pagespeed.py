@@ -6,6 +6,7 @@ from datetime import datetime
 from time import sleep
 
 data_file = "pagepeed.json"
+apikey="<apikey>"
 
 def get_pagerspeed (url):
 	responce = get(url)
@@ -21,9 +22,9 @@ with open(data_file, "r") as file:
 
 for site_name in list(data.keys()):
 	curdate = datetime.timestamp(datetime.now())
-	desktop = get_pagerspeed("https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://" + site_name)
+	desktop = get_pagerspeed("https://www.googleapis.com/pagespeedonline/v5/runPagespeed?key=" + apikey + "&url=https://" + site_name)
 	sleep(101)
-	mobile = get_pagerspeed("https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&url=https://" + site_name)
+	mobile = get_pagerspeed("https://www.googleapis.com/pagespeedonline/v5/runPagespeed?key=" + apikey + "&strategy=mobile&url=https://" + site_name)
 	sleep(101)
 	with open(data_file, "r") as file:
 		data = loads(file.read())
