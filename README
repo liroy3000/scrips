@@ -28,3 +28,4 @@ PowerShell:
 Bash:
 - remove.sh - удаление папок в заданной директории с контролем load average.
 - get_bad_mailbox.sh - выгрузка несуществующих электронных адресов из лога Exim.
+- upload_to_yandex_s3.sh - загрузка резервных копий в хранилише yandex object s3. Требуется настроенная утилита aws.
