@@ -6,6 +6,7 @@ from datetime import datetime
 from time import sleep
 
 data_file = "pagepeed.json"
+error_log = "error_log.log"
 apikey="<apikey>"
 
 def get_pagerspeed (url):
@@ -14,7 +15,14 @@ def get_pagerspeed (url):
 		page_speed_data = loads(responce.text)
 		return page_speed_data['lighthouseResult']['categories']['performance']['score']
 	else:
-	    return "Error connect to Googleapis!"
+	    with open(error_log, "a") as file:
+			file.write(str(datetime.now()) + "\n\n")
+			file.write("Error connect to googleapis:\n")
+			file.write("URL: " + url + "\n")
+			file.write(responce.test + "\n")
+			file.write("----------------\n")
+			file.close()
+			return 0
 
 with open(data_file, "r") as file:
 	data = loads(file.read())
