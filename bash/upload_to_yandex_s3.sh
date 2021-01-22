@@ -3,8 +3,8 @@
 bucket_name="backet_name"
 backup_name="backup_site_name"
 
-/usr/local/bin/aws --endpoint-url=https://storage.yandexcloud.net s3 cp $2/*$dat.tar.gz s3://$bucket_name/$backup_name/
-/usr/local/bin/aws --endpoint-url=https://storage.yandexcloud.net s3 cp $2/*$dat.sql.gz s3://$bucket_name/$backup_name/
+/usr/local/bin/aws --endpoint-url=https://storage.yandexcloud.net s3 cp $2/*$DATE.tar.gz s3://$bucket_name/$backup_name/
+/usr/local/bin/aws --endpoint-url=https://storage.yandexcloud.net s3 cp $2/*$DATE.sql.gz s3://$bucket_name/$backup_name/
 /usr/local/bin/aws --endpoint-url=https://storage.yandexcloud.net s3 ls s3://$bucket_name/$backup_name/ | while read -r line;
   do
     createDate=`echo $line|awk {'print $1" "$2'}`
