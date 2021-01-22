@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 BACKUP_LOCAL_PATH="/path/to/local/backup"
 BUCKET_NAME="backet_name"
 BACKUP_NAME="backup_site_name"
